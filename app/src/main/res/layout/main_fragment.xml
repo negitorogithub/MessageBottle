@@ -21,12 +21,21 @@
             app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toTopOf="@+id/submitButton" android:layout_margin="8dp" android:autofillHints="yes"/>
     <Button
-            android:text="Send"
+            android:text="Submit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/submitButton" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/submitButton"
+            app:layout_constraintStart_toStartOf="parent"
             android:layout_marginLeft="8dp" android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp" android:layout_marginRight="8dp" android:textSize="36sp"
-    />
+            app:layout_constraintBottom_toTopOf="@+id/getButton" android:layout_margin="8dp"/>
+    <Button
+            android:text="Get"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/getButton" android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="8dp" android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp" android:layout_marginRight="8dp" android:layout_margin="8dp"
+            android:textSize="36sp"/>
 </android.support.constraint.ConstraintLayout>
