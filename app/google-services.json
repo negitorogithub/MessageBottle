@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "946709598656",
+    "firebase_url": "https://messagebottle-cce0b.firebaseio.com",
+    "project_id": "messagebottle-cce0b",
+    "storage_bucket": "messagebottle-cce0b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:946709598656:android:8c03d70cda2fcd6a",
+        "android_client_info": {
+          "package_name": "unifar.unifar.messagebottle"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "946709598656-htpu1gdg9nd9sjkk965tc8nn6tf8itse.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbF9nfUGkKyeBBLOZm6OoRIUwETmHyZn0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
