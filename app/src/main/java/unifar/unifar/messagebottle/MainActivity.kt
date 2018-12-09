@@ -2,7 +2,7 @@ package unifar.unifar.messagebottle
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import unifar.unifar.messagebottle.ui.main.MainFragment
+import unifar.unifar.messagebottle.ui.main.SubmitFragment
 
 class MainActivity : AppCompatActivity() {
 
