@@ -17,6 +17,7 @@ import unifar.unifar.messagebottle.MainFragment
 import java.util.*
 
 
+
 class SubmitFragment : Fragment() {
 
     companion object {
@@ -29,12 +30,19 @@ class SubmitFragment : Fragment() {
     ): View {
 
         val view = inflater.inflate(R.layout.submit_fragment, container, false)
+
         val submitButton = view.findViewById(R.id.submitButton) as Button
         val messageEditText = view.findViewById(R.id.messageEditText) as EditText
 
         val db = FirebaseFirestore.getInstance()
 
         submitButton.setOnClickListener {
+            val content = messageEditText.text.toString()
+            if (content.isEmpty()){
+                Toast.makeText(activity, resources.getText(R.string.fillblank), Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+
             //まずカウンター取得
             db.collection("counters")
                 .document("content")
@@ -43,7 +51,6 @@ class SubmitFragment : Fragment() {
                 .addOnCompleteListener { task1 ->
                     val data = task1.result?.data
                     val dbSize = data?.get("size")?.toString()?.toInt()
-                    val content = messageEditText.text.toString()
                     Log.d("myapp", dbSize.toString())
 
                     dbSize?.let {
@@ -64,8 +71,8 @@ class SubmitFragment : Fragment() {
                                     .document("content")
                                     .update("size", dbSize + 1)
                                     .addOnSuccessListener {
+                                        Toast.makeText(activity, resources.getText(R.string.success), Toast.LENGTH_LONG).show()
                                         fragmentManager?.beginTransaction()?.replace(R.id.container, MainFragment.newInstance())?.commit()
-                                        Toast.makeText(activity, "success!:$content", Toast.LENGTH_LONG).show()
                                     }
                             }
                     }

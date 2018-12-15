@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MessageBottle</string>
+    <string name="float_">手紙を流す</string>
+    <string name="fillblank">メッセージを入れてください</string>
+    <string name="success">手紙を流せました!</string>
+</resources>

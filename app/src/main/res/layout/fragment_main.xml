@@ -11,7 +11,7 @@
     <ImageView
             android:src="@drawable/back"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" android:id="@+id/messageBottleImageView" android:scaleType="fitXY"/>
+            android:layout_height="match_parent" android:id="@+id/BackImageView" android:scaleType="fitXY"/>
     <ImageView
             android:src="@drawable/inkbottleresized"
             android:layout_width="94dp"
@@ -20,12 +20,12 @@
             android:layout_gravity="bottom|end"
             android:layout_marginBottom="48dp"
             android:layout_marginEnd="36dp"
-            android:layout_marginRight="36dp"/>
+            android:layout_marginRight="36dp" android:visibility="visible"/>
     <ImageView
             android:src="@drawable/messagebottle"
             android:layout_width="178dp"
             android:layout_height="116dp"
-            android:id="@+id/BackImageView"
+            android:id="@+id/messageBottleImageView"
             android:layout_gravity="bottom"
             android:layout_marginBottom="72dp"
             android:layout_marginLeft="48dp"
