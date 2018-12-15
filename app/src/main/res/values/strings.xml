@@ -5,4 +5,9 @@
     <string name="float_">float letter</string>
     <string name="fillblank">Please fill blank</string>
     <string name="success">succeed in floating!</string>
+    <string name="gotit">GOT IT</string>
+    <string name="thank">Thank you for installing!</string>
+    <string name="bottle1">You can read message from someone by pressing this bottle</string>
+    <string name="bottle2">The bottle comes every 40 seconds</string>
+    <string name="ink">You can write a message and float one by pressing this pen</string>
 </resources>

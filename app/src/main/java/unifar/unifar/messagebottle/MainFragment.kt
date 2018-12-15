@@ -9,10 +9,6 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.Toast
 import com.google.firebase.firestore.FirebaseFirestore
 import unifar.unifar.messagebottle.ui.main.SubmitFragment
 import android.content.Context.MODE_PRIVATE
@@ -20,7 +16,13 @@ import android.content.Context.RECEIVER_VISIBLE_TO_INSTANT_APPS
 import android.content.SharedPreferences
 import android.opengl.Visibility
 import android.os.Handler
+import android.widget.*
 import com.google.android.gms.common.util.concurrent.HandlerExecutor
+import uk.co.deanwild.materialshowcaseview.MaterialShowcaseSequence
+import uk.co.deanwild.materialshowcaseview.ShowcaseConfig
+import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView
+
+
 
 
 class MainFragment : Fragment() {
@@ -39,7 +41,32 @@ class MainFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_main, container, false)
         val inkView = view.findViewById(R.id.inkBottleImageView) as ImageView
         val bottleView = view.findViewById(R.id.messageBottleImageView) as ImageView
+        val dummyView = view.findViewById(R.id.dummy) as Space
 
+
+        // sequence example
+        val config = ShowcaseConfig()
+        config.delay = 500 // half second between each showcase view
+
+
+        val tutorialID = "tutorial1"
+        val sequence = MaterialShowcaseSequence(activity, tutorialID)
+
+        sequence.setConfig(config)
+        sequence.addSequenceItem(
+            dummyView,
+            resources.getString(R.string.thank), resources.getString(R.string.gotit)
+        ).addSequenceItem(
+            bottleView,
+            resources.getString(R.string.bottle1), resources.getString(R.string.gotit)
+        ).addSequenceItem(
+            bottleView,
+            resources.getString(R.string.bottle2), resources.getString(R.string.gotit)
+        ).addSequenceItem(
+            inkView,
+            resources.getString(R.string.ink), resources.getString(R.string.gotit)
+        )
+        sequence.start()
 
         val second2milli = 1000L
         val getIntervalSecond = 40L

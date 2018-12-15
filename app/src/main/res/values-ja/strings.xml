@@ -4,4 +4,9 @@
     <string name="float_">手紙を流す</string>
     <string name="fillblank">メッセージを入れてください</string>
     <string name="success">手紙を流せました!</string>
+    <string name="gotit">わかった</string>
+    <string name="thank">インストールありがとうございます!</string>
+    <string name="bottle2">瓶は40秒ごとにやってきます</string>
+    <string name="ink">このペンをタップすると誰かにメッセージが書けます</string>
+    <string name="bottle1">この瓶をタップすると誰かからのメッセージが読めます</string>
 </resources>
