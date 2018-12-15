@@ -13,7 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" android:id="@+id/BackImageView" android:scaleType="fitXY"/>
     <ImageView
-            android:src="@drawable/inkbottleresized"
+            android:src="@drawable/pen"
             android:layout_width="94dp"
             android:layout_height="94dp"
             android:id="@+id/inkBottleImageView"
