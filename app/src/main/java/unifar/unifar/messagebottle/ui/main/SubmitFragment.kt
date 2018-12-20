@@ -36,7 +36,9 @@ class SubmitFragment : Fragment() {
 
         val db = FirebaseFirestore.getInstance()
 
-        submitButton.setOnClickListener {
+        submitButton.setOnClickListener {button ->
+            button.isEnabled = false
+            submitButton.text = resources.getString(R.string.sendingMessage)
             val content = messageEditText.text.toString()
             if (content.isEmpty()){
                 Toast.makeText(activity, resources.getText(R.string.fillblank), Toast.LENGTH_LONG).show()
@@ -72,8 +74,11 @@ class SubmitFragment : Fragment() {
                                     .update("size", dbSize + 1)
                                     .addOnSuccessListener {
                                         Toast.makeText(activity, resources.getText(R.string.success), Toast.LENGTH_LONG).show()
-                                        fragmentManager?.beginTransaction()?.replace(R.id.container, MainFragment.newInstance())?.commit()
+                                        fragmentManager?.beginTransaction()?.replace(R.id.container, MainFragment.newInstance())?.commitAllowingStateLoss()
                                     }
+                            }
+                            .addOnFailureListener {
+                                button.isEnabled = true
                             }
                     }
                 }

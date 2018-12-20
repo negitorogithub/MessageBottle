@@ -9,4 +9,5 @@
     <string name="bottle2">瓶は40秒ごとにやってきます</string>
     <string name="ink">このペンをタップすると誰かにメッセージが書けます</string>
     <string name="bottle1">この瓶をタップすると誰かからのメッセージが読めます</string>
+    <string name="sendingMessage">瓶を流しています…</string>
 </resources>

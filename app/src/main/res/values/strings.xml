@@ -10,4 +10,5 @@
     <string name="bottle1">You can read message from someone by pressing this bottle</string>
     <string name="bottle2">The bottle comes every 40 seconds</string>
     <string name="ink">You can write a message and float one by pressing this pen</string>
+    <string name="sendingMessage">Now floating…</string>
 </resources>
