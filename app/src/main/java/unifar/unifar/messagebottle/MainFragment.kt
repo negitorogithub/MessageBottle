@@ -21,8 +21,7 @@ import com.google.android.gms.common.util.concurrent.HandlerExecutor
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseSequence
 import uk.co.deanwild.materialshowcaseview.ShowcaseConfig
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView
-
-
+import kotlin.random.Random
 
 
 class MainFragment : Fragment() {
@@ -109,40 +108,56 @@ class MainFragment : Fragment() {
                     val cursor = data1?.get("cursor")?.toString()?.toInt()
                     Log.d("myapp", "cursor:$cursor")
 
-                    cursor?.let {
-                        val nextCursor = cursor + 1
-                        db.collection("messages")
-                            .document("$cursor")
-                            .get()
-                            .addOnCompleteListener { task2 ->
-                                activity?.getSharedPreferences("DataSave", Context.MODE_PRIVATE)?.edit()
-                                    ?.putLong(lastGetTimeKey, System.currentTimeMillis())
-                                    ?.apply()
+                    if (cursor == dbSize){
+                        cursor?.let {
+                            db.collection("messages")
+                                .document("${Random.nextInt(1, cursor - 1)}")
+                                .get()
+                                .addOnCompleteListener { task2 ->
+                                    activity?.getSharedPreferences("DataSave", Context.MODE_PRIVATE)?.edit()
+                                        ?.putLong(lastGetTimeKey, System.currentTimeMillis())
+                                        ?.apply()
 
-                                val data2 = task2.result?.data
-                                val content = data2?.get("message")?.toString()
-                                content?.let {
-                                    fragmentManager?.beginTransaction()
-                                        ?.replace(R.id.container, ShowMessageFragment.newInstance(content))?.commit()
+                                    val data2 = task2.result?.data
+                                    val content = data2?.get("message")?.toString()
+                                    content?.let {
+                                        fragmentManager?.beginTransaction()
+                                            ?.replace(R.id.container, ShowMessageFragment.newInstance(content))?.commit()
+                                    }
                                 }
-                            }
-                            //最後にカウンター更新とローカルカウンタ更新
-                            .addOnCompleteListener {
-                                dbSize?.let {
-                                    if (nextCursor <= dbSize)
-                                        db.collection("counters")
-                                            .document("content")
-                                            .update("cursor", nextCursor)
+                        }
+                    }else {
+                        cursor?.let {
+                            val nextCursor = cursor + 1
+                            db.collection("messages")
+                                .document("$cursor")
+                                .get()
+                                .addOnCompleteListener { task2 ->
+                                    activity?.getSharedPreferences("DataSave", Context.MODE_PRIVATE)?.edit()
+                                        ?.putLong(lastGetTimeKey, System.currentTimeMillis())
+                                        ?.apply()
+
+                                    val data2 = task2.result?.data
+                                    val content = data2?.get("message")?.toString()
+                                    content?.let {
+                                        fragmentManager?.beginTransaction()
+                                            ?.replace(R.id.container, ShowMessageFragment.newInstance(content))
+                                            ?.commit()
+                                    }
                                 }
-                            }
+                                //最後にカウンター更新とローカルカウンタ更新
+                                .addOnCompleteListener {
+                                    dbSize?.let {
+                                        if (nextCursor <= dbSize)
+                                            db.collection("counters")
+                                                .document("content")
+                                                .update("cursor", nextCursor)
+                                    }
+                                }
+                        }
                     }
                 }
         }
-
-
-
         return view
     }
-
-
 }

@@ -15,7 +15,8 @@ import unifar.unifar.messagebottle.R
 import com.google.firebase.firestore.FirebaseFirestore
 import unifar.unifar.messagebottle.MainFragment
 import java.util.*
-
+import android.provider.Settings.Secure
+import android.provider.Settings
 
 
 class SubmitFragment : Fragment() {
@@ -57,6 +58,7 @@ class SubmitFragment : Fragment() {
 
                     dbSize?.let {
                         val id = dbSize + 1
+                        val androidId = Settings.Secure.ANDROID_ID
                         db.collection("messages")
                             .document("$id")
                             .set(
@@ -65,6 +67,7 @@ class SubmitFragment : Fragment() {
                                         put("id", id)
                                         put("message", content)
                                         put("time", FieldValue.serverTimestamp())
+                                        put("androidId", androidId)
                                     }
                             )
                             //最後にカウンター更新
