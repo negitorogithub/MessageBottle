@@ -1,5 +1,6 @@
 package unifar.unifar.messagebottle.ui.main
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -17,6 +18,7 @@ import unifar.unifar.messagebottle.MainFragment
 import java.util.*
 import android.provider.Settings.Secure
 import android.provider.Settings
+import com.google.android.gms.ads.identifier.AdvertisingIdClient
 
 
 class SubmitFragment : Fragment() {
@@ -58,7 +60,7 @@ class SubmitFragment : Fragment() {
 
                     dbSize?.let {
                         val id = dbSize + 1
-                        val androidId = Settings.Secure.ANDROID_ID
+                        val installedAt = activity?.getSharedPreferences("DataSave", Context.MODE_PRIVATE)?.getLong("installedAt", -1L)
                         db.collection("messages")
                             .document("$id")
                             .set(
@@ -67,7 +69,7 @@ class SubmitFragment : Fragment() {
                                         put("id", id)
                                         put("message", content)
                                         put("time", FieldValue.serverTimestamp())
-                                        put("androidId", androidId)
+                                        installedAt?.let { it1 -> put("androidId", it1) }
                                     }
                             )
                             //最後にカウンター更新

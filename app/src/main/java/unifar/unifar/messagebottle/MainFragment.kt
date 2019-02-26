@@ -17,6 +17,7 @@ import android.content.SharedPreferences
 import android.opengl.Visibility
 import android.os.Handler
 import android.widget.*
+import com.google.android.gms.ads.identifier.AdvertisingIdClient
 import com.google.android.gms.common.util.concurrent.HandlerExecutor
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseSequence
 import uk.co.deanwild.materialshowcaseview.ShowcaseConfig
@@ -40,6 +41,8 @@ class MainFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_main, container, false)
         val inkView = view.findViewById(R.id.inkBottleImageView) as ImageView
         val bottleView = view.findViewById(R.id.messageBottleImageView) as ImageView
+
+
         val dummyView = view.findViewById(R.id.dummy) as Space
 
 
@@ -106,6 +109,7 @@ class MainFragment : Fragment() {
                     val data1 = task1.result?.data
                     val dbSize = data1?.get("size")?.toString()?.toInt()
                     val cursor = data1?.get("cursor")?.toString()?.toInt()
+                    val installedAt = activity?.getSharedPreferences("DataSave", Context.MODE_PRIVATE)?.getLong("installedAt", -1L)
                     Log.d("myapp", "cursor:$cursor")
 
                     if (cursor == dbSize){
@@ -117,7 +121,6 @@ class MainFragment : Fragment() {
                                     activity?.getSharedPreferences("DataSave", Context.MODE_PRIVATE)?.edit()
                                         ?.putLong(lastGetTimeKey, System.currentTimeMillis())
                                         ?.apply()
-
                                     val data2 = task2.result?.data
                                     val content = data2?.get("message")?.toString()
                                     content?.let {
@@ -139,25 +142,53 @@ class MainFragment : Fragment() {
 
                                     val data2 = task2.result?.data
                                     val content = data2?.get("message")?.toString()
-                                    content?.let {
-                                        fragmentManager?.beginTransaction()
-                                            ?.replace(R.id.container, ShowMessageFragment.newInstance(content))
-                                            ?.commit()
+                                    val androidId = data2?.get("androidId")?.toString()?.toLong()
+                                    if (androidId == installedAt) {
+                                        cursor.let {
+                                            db.collection("messages")
+                                                .document("${Random.nextInt(1, cursor - 1)}")
+                                                .get()
+                                                .addOnCompleteListener { task2 ->
+                                                    activity?.getSharedPreferences("DataSave", Context.MODE_PRIVATE)
+                                                        ?.edit()
+                                                        ?.putLong(lastGetTimeKey, System.currentTimeMillis())
+                                                        ?.apply()
+                                                    val data3 = task2.result?.data
+                                                    val content2 = data3?.get("message")?.toString()
+                                                    content2?.let {
+                                                        fragmentManager?.beginTransaction()
+                                                            ?.replace(
+                                                                R.id.container,
+                                                                ShowMessageFragment.newInstance(content2)
+                                                            )?.commit()
+                                                    }
+                                                }
+                                        }
+                                    }else {
+                                        content?.let {
+                                            fragmentManager?.beginTransaction()
+                                                ?.replace(R.id.container, ShowMessageFragment.newInstance(content))
+                                                ?.commit()
+                                        }
+                                        //最後にカウンター更新とローカルカウンタ更新
+                                        dbSize?.let {
+                                            if (nextCursor <= dbSize)
+                                                db.collection("counters")
+                                                    .document("content")
+                                                    .update("cursor", nextCursor)
+                                        }
                                     }
-                                }
-                                //最後にカウンター更新とローカルカウンタ更新
-                                .addOnCompleteListener {
-                                    dbSize?.let {
-                                        if (nextCursor <= dbSize)
-                                            db.collection("counters")
-                                                .document("content")
-                                                .update("cursor", nextCursor)
-                                    }
+
+
                                 }
                         }
                     }
                 }
         }
         return view
+    }
+
+    fun getRandomMessage(): Unit {
+
     }
 }
