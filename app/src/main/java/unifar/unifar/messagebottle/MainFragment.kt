@@ -187,8 +187,4 @@ class MainFragment : Fragment() {
         }
         return view
     }
-
-    fun getRandomMessage(): Unit {
-
-    }
 }
