@@ -3,25 +3,18 @@ package unifar.unifar.messagebottle
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
 import android.support.v4.app.Fragment
 import android.util.Log
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.Space
 import com.google.firebase.firestore.FirebaseFirestore
-import unifar.unifar.messagebottle.ui.main.SubmitFragment
-import android.content.Context.MODE_PRIVATE
-import android.content.Context.RECEIVER_VISIBLE_TO_INSTANT_APPS
-import android.content.SharedPreferences
-import android.opengl.Visibility
-import android.os.Handler
-import android.widget.*
-import com.google.android.gms.ads.identifier.AdvertisingIdClient
-import com.google.android.gms.common.util.concurrent.HandlerExecutor
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseSequence
 import uk.co.deanwild.materialshowcaseview.ShowcaseConfig
-import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView
+import unifar.unifar.messagebottle.ui.main.SubmitFragment
 import kotlin.random.Random
 
 

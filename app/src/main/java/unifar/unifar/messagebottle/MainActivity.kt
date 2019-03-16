@@ -1,11 +1,8 @@
 package unifar.unifar.messagebottle
 
 import android.content.Context
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import com.google.android.gms.ads.identifier.AdvertisingIdClient
-import unifar.unifar.messagebottle.ui.main.SubmitFragment
-import java.util.*
+import android.support.v7.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
