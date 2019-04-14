@@ -15,6 +15,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseSequence
 import uk.co.deanwild.materialshowcaseview.ShowcaseConfig
 import unifar.unifar.messagebottle.ui.main.SubmitFragment
+import java.util.*
 import kotlin.random.Random
 
 
@@ -34,8 +35,7 @@ class MainFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_main, container, false)
         val inkView = view.findViewById(R.id.inkBottleImageView) as ImageView
         val bottleView = view.findViewById(R.id.messageBottleImageView) as ImageView
-
-
+        val backView = view.findViewById(R.id.BackImageView) as ImageView
         val dummyView = view.findViewById(R.id.dummy) as Space
 
 
@@ -83,6 +83,20 @@ class MainFragment : Fragment() {
                     }
                 }
                 Handler().postDelayed(this, reshowTimeIntervalSecond * second2milli)
+            }
+        }.run()
+
+
+        val refreshBackTimeIntervalSecond = 1L
+        object :  Runnable{
+            override fun run() {
+                val currentHour = Calendar.getInstance().get(Calendar.HOUR)
+                if ((currentHour <= 6)||(currentHour >= 20)){
+                    backView.setImageResource(R.drawable.back)
+                }else{
+                    backView.setImageResource(R.drawable.back_night_2)
+                }
+                Handler().postDelayed(this, refreshBackTimeIntervalSecond * second2milli)
             }
         }.run()
 
